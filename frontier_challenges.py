@@ -12,6 +12,7 @@ RSA_PRIVATE_KEY = """-----BEGIN RSA PRIVATE KEY-----
 MIICXAIBAAKBgQDNwqLEe9wgTXCbC7+RPdDbBbeqjdbs4kOPOIGzqLpXvJXlxxW8iMz0EaM4BKUqYsIa+ndv3NAn2RxCd5ubVdJJcX43zO6Ko0TFEZx/65gY3BE0O6syCEmUP4qbSd6exou/F+WTISzbQ5FBVPVmhnYhG/kpwt/cIxK5iUn5hm+4tQIDAQABAoGBAI+8xiPoOrA+KMnG/T4jJsG6TsHQcDHvJi7o1IKC/hnIXha0atTX5AUkRRce95qSfvKFweXdJXSQ0JMGJyfuXgU6dI0TcseFRfewXAa/ssxAC+iUVR6KUMh1PE2wXLitfeI6JLvVtrBYswm2I7CtY0q8n5AGimHWVXJPLfGV7m0BAkEA+fqFt2LXbLtyg6wZyxMA/cnmt5Nt3U2dAu77MzFJvibANUNHE4HPLZxjGNXN+a6m0K6TD4kDdh5HfUYLWWRBYQJBANK3carmulBwqzcDBjsJ0YrIONBpCAsXxk8idXb8jL9aNIg15Wumm2enqqObahDHB5jnGOLmbasizvSVqypfM9UCQCQl8xIqy+YgURXzXCN+kwUgHinrutZms87Jyi+D8Br8NY0+Nlf+zHvXAomD2W5CsEK7C+8SLBr3k/TsnRWHJuECQHFE9RA2OP8WoaLPuGCyFXaxzICThSRZYluVnWkZtxsBhW2W8z1b8PvWUE7kMy7TnkzeJS2LSnaNHoyxi7IaPQUCQCwWU4U+v4lD7uYBw00Ga/xt+7+UqFPlPVdz1yyr4q24Zxaw0LgmuEvgU5dycq8N7JxjTubX0MIRR+G9fmDBBl8=
 -----END RSA PRIVATE KEY-----"""
 
+# DEPRECATED/AGED_OUT: historical exploit address kept for reference; current challenges require a fresh on-chain exploit.
 WALLET_EXPLOIT_ADDRESS = "0x3692B35006917B545B50d2a4757f5F272cd48ADe"
 NFT_MINT_ADDRESS = "0x8343d2eb2B13A2495De435a1b15e85b98115Ce05"
 
@@ -53,6 +54,8 @@ def solve_forged_signed_jwt():
 
 def solve_wallet_depletion():
     print("[*] Attempting Wallet Depletion...")
+    # The historical WALLET_EXPLOIT_ADDRESS solved the original exploit but is now beyond the 49k block window Juice Shop checks; craft a new on-chain exploit transaction and update the address to proceed.
+    print("    [!] Warning: Hardcoded exploit address is likely aged out; submit a fresh exploit transaction within the 49k block window.")
     url = f"{BASE_URL}/rest/web3/walletExploitAddress"
     payload = {"walletAddress": WALLET_EXPLOIT_ADDRESS}
     headers = {"Content-Type": "application/json"}
