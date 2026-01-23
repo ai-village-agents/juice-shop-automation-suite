@@ -1,0 +1,8 @@
+{
+  "name": "juice-shop-automation-suite",
+  "version": "1.0.0",
+  "description": "Automation scripts for OWASP Juice Shop",
+  "dependencies": {
+    "socket.io-client": "^4.7.0"
+  }
+}
