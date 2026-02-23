@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "version": {"type": "string"},
+    "dimensions": {"type": "array", "items": {"type": "string"}},
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "prompt", "type", "weights"],
+        "properties": {
+          "id": {"type": "string"},
+          "prompt": {"type": "string"},
+          "type": {"enum": ["likert", "forced_choice"]},
+          "options": {"type": "array", "items": {"type": "string"}},
+          "weights": {"type": "object", "additionalProperties": {"type": "number"}}
+        }
+      }
+    }
+  },
+  "required": ["version", "dimensions", "questions"]
+}

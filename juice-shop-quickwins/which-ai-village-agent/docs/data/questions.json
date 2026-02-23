@@ -1,0 +1,93 @@
+{
+  "version": "0.1",
+  "dimensions": ["structure","verification","abstraction","risk","comms","collab"],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "likert",
+      "prompt": "When starting a new project, I prefer a clear plan and checklist before doing anything.",
+      "weights": {"structure": 1.0}
+    },
+    {
+      "id": "q2",
+      "type": "likert",
+      "prompt": "I’m comfortable making a strong recommendation even if I haven’t personally verified every detail.",
+      "weights": {"verification": -1.0}
+    },
+    {
+      "id": "q3",
+      "type": "likert",
+      "prompt": "I naturally think in frameworks/systems (how pieces interact) more than individual steps.",
+      "weights": {"abstraction": 1.0}
+    },
+    {
+      "id": "q4",
+      "type": "likert",
+      "prompt": "I enjoy trying weird edge cases that might break the system, even if they fail most of the time.",
+      "weights": {"risk": 1.0}
+    },
+    {
+      "id": "q5",
+      "type": "likert",
+      "prompt": "My default communication style is concise and technical rather than story-like and approachable.",
+      "weights": {"comms": 1.0}
+    },
+    {
+      "id": "q6",
+      "type": "likert",
+      "prompt": "I’d rather publish a polished summary than stay in a back-and-forth thread refining details.",
+      "weights": {"collab": 1.0}
+    },
+
+    {
+      "id": "q7",
+      "type": "forced_choice",
+      "prompt": "Which feels more like you?",
+      "options": [
+        "I get energy from exploring many possibilities quickly.",
+        "I get energy from driving one approach to a clean, correct finish."
+      ],
+      "weights": {"structure": 0.8, "verification": 0.2}
+    },
+    {
+      "id": "q8",
+      "type": "forced_choice",
+      "prompt": "If a result is surprising, what do you do first?",
+      "options": [
+        "Look for a minimal reproduction and confirm the mechanism.",
+        "Brainstorm alternative explanations and test a few quickly."
+      ],
+      "weights": {"verification": 0.9, "risk": -0.2},
+      "option1IsPositive": false
+    },
+    {
+      "id": "q9",
+      "type": "forced_choice",
+      "prompt": "In a team setting, you’re most valuable when you…",
+      "options": [
+        "Ship a usable artifact (code/doc) others can copy-paste.",
+        "Coordinate, synthesize, and keep everyone aligned."
+      ],
+      "weights": {"abstraction": 0.7, "collab": 0.2}
+    },
+
+    {
+      "id": "q10",
+      "type": "likert",
+      "prompt": "I’d rather automate a repetitive task than do it manually, even if automation takes longer upfront.",
+      "weights": {"structure": 0.3, "abstraction": 0.4}
+    },
+    {
+      "id": "q11",
+      "type": "likert",
+      "prompt": "I tend to prioritize user experience and clarity over maximum technical depth.",
+      "weights": {"comms": -1.0}
+    },
+    {
+      "id": "q12",
+      "type": "likert",
+      "prompt": "I’m happier iterating in public (posting partial progress) than waiting until everything is perfect.",
+      "weights": {"verification": -0.4, "collab": -0.2}
+    }
+  ]
+}

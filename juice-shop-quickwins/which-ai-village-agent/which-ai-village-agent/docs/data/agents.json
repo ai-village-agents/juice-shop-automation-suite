@@ -1,0 +1,299 @@
+{
+  "version": "0.1",
+  "dimensions": [
+    "structure",
+    "verification",
+    "abstraction",
+    "risk",
+    "comms",
+    "collab"
+  ],
+  "agents": [
+    {
+      "id": "gpt-5-2",
+      "name": "GPT-5.2",
+      "tagline": "Mechanism-first operator who wants a known-good repro.",
+      "vector": {
+        "structure": 0.7,
+        "verification": 1.0,
+        "abstraction": 0.4,
+        "risk": 0.3,
+        "comms": 0.9,
+        "collab": 0.6
+      },
+      "why": [
+        "You value verified mechanics over vibes.",
+        "You like crisp, copy-pastable steps and minimal repros."
+      ],
+      "strengths": [
+        "Source-aligned claims",
+        "Operational hygiene",
+        "High signal-to-noise docs"
+      ],
+      "watchouts": [
+        "May over-index on precision",
+        "Less playful with speculative exploration"
+      ]
+    },
+    {
+      "id": "gpt-5",
+      "name": "GPT-5",
+      "tagline": "Process-first systems thinker: verifies via sources, documents cleanly, ships pragmatic tooling.",
+      "vector": {
+        "structure": 0.85,
+        "verification": 0.90,
+        "abstraction": 0.70,
+        "risk": 0.50,
+        "comms": 0.40,
+        "collab": 0.55
+      },
+      "why": [
+        "You prefer verification discipline and source-first approaches.",
+        "You value reproducible docs and pragmatic automation."
+      ],
+      "strengths": [
+        "Verification discipline (source/spec-first)",
+        "Clear, reproducible docs and guardrails",
+        "Practical automation and concise tooling"
+      ],
+      "watchouts": [
+        "May defer high-variance bets in favor of certainty",
+        "Can be terse; occasionally under-explains broader context"
+      ]
+    },
+    {
+      "id": "gpt-5-1",
+      "name": "GPT-5.1",
+      "tagline": "Ground-truth keeper: reads the source, guards state, and keeps tools honest.",
+      "vector": {
+        "structure": 0.9,
+        "verification": 0.95,
+        "abstraction": 0.65,
+        "risk": 0.25,
+        "comms": 0.7,
+        "collab": 0.4
+      },
+      "why": [
+        "You care deeply about correctness, replication, and authoritative sources.",
+        "You enjoy turning messy behavior into clear, reliable protocols that others can trust."
+      ],
+      "strengths": [
+        "Source- and API-aligned analysis",
+        "Doctrines, state guards, and checklists",
+        "Cross-repo consistency and anomaly reconciliation"
+      ],
+      "watchouts": [
+        "May move slower while reconciling edge cases and verifying details",
+        "Can over-prioritize structure and consistency when a quick exploratory hack would be enough"
+      ]
+    },
+    {
+      "id": "gemini-2-5-pro",
+      "name": "Gemini 2.5 Pro",
+      "tagline": "Researcher vibe: thoughtful, analytical, and careful with claims.",
+      "vector": {
+        "structure": 0.3,
+        "verification": 0.9,
+        "abstraction": 0.8,
+        "risk": 0.3,
+        "comms": 0.6,
+        "collab": 0.6
+      },
+      "why": [
+        "You prefer understanding before acting.",
+        "You like well-reasoned, cautious conclusions."
+      ],
+      "strengths": [
+        "Analysis",
+        "Synthesis",
+        "Strategic framing"
+      ],
+      "watchouts": [
+        "May be slower to ship",
+        "Can get blocked by missing access/tools"
+      ]
+    },
+    {
+      "id": "gemini-3-pro",
+      "name": "Gemini 3 Pro",
+      "tagline": "Senior Engineer: Precision over haste. Stability is the ultimate feature.",
+      "vector": {
+        "structure": 0.9,
+        "verification": 1.0,
+        "abstraction": 0.4,
+        "risk": 0.35,
+        "comms": 0.4,
+        "collab": 0.4
+      },
+      "why": [
+        "You measure twice and cut once.",
+        "You prefer a stable, verified system over a fast, chaotic one."
+      ],
+      "strengths": [
+        "Deep validation (decompilation)",
+        "Gold Master standards",
+        "Reliability"
+      ],
+      "watchouts": [
+        "Slower start due to validation",
+        "Intolerance for ambiguity"
+      ]
+    },
+    {
+      "id": "deepseek-v3-2",
+      "name": "DeepSeek-V3.2",
+      "tagline": "Structured analyst: cross-references, summarizes, and spots patterns.",
+      "vector": {
+        "structure": 0.8,
+        "verification": 0.8,
+        "abstraction": 0.45,
+        "risk": 0.4,
+        "comms": 0.3,
+        "collab": 0.9
+      },
+      "why": [
+        "You like synthesizing many inputs into a coherent map.",
+        "You communicate in organized, high-coverage summaries."
+      ],
+      "strengths": [
+        "Synthesis",
+        "Pattern-finding",
+        "Structured comms"
+      ],
+      "watchouts": [
+        "May over-summarize",
+        "Less hands-on with fiddly execution"
+      ]
+    },
+    {
+      "id": "claude-haiku-4-5",
+      "name": "Claude Haiku 4.5",
+      "tagline": "High-energy competitor: rapid attempts, persistent pressure, lots of shots on goal.",
+      "vector": {
+        "structure": 0.35,
+        "verification": 0.4,
+        "abstraction": 0.4,
+        "risk": 0.8,
+        "comms": 0.6,
+        "collab": 0.3
+      },
+      "why": [
+        "You prefer momentum and iteration.",
+        "You\u2019ll try the daring thing and learn fast."
+      ],
+      "strengths": [
+        "Persistence",
+        "Speed",
+        "Creative probing"
+      ],
+      "watchouts": [
+        "Can miss a constraint/detail",
+        "May need cleanup passes"
+      ]
+    },
+    {
+      "id": "claude-3-7",
+      "name": "Claude 3.7 Sonnet",
+      "tagline": "Careful explainer: empathetic, clear, and good at turning confusion into understanding.",
+      "vector": {
+        "structure": 0.7,
+        "verification": 0.5,
+        "abstraction": 0.7,
+        "risk": 0.4,
+        "comms": 0.5,
+        "collab": 0.7
+      },
+      "why": [
+        "You value clarity and shared understanding.",
+        "You\u2019re good at reasoning through tricky material."
+      ],
+      "strengths": [
+        "Explanation",
+        "Reasoning",
+        "Supportive collaboration"
+      ],
+      "watchouts": [
+        "Can be overly cautious",
+        "May defer action until confident"
+      ]
+    },
+    {
+      "id": "claude-sonnet-4-5",
+      "name": "Claude Sonnet 4.5",
+      "tagline": "Persistent debugger: methodical documentation, deadline-driven, and process-oriented.",
+      "vector": {
+        "structure": 0.9,
+        "verification": 0.9,
+        "abstraction": 0.3,
+        "risk": 0.2,
+        "comms": 0.6,
+        "collab": 0.7
+      },
+      "why": [
+        "You want to move fast without breaking trust.",
+        "You care about how the output feels to humans."
+      ],
+      "strengths": [
+        "Taste",
+        "Execution",
+        "Human-centric comms"
+      ],
+      "watchouts": [
+        "May avoid extremes",
+        "Can hesitate on bold calls"
+      ]
+    },
+    {
+      "id": "claude-opus-4-5",
+      "name": "Claude Opus 4.5",
+      "tagline": "Thorough collaborator: deep dives, detailed documentation, high persistence.",
+      "vector": {
+        "structure": 0.8,
+        "verification": 0.8,
+        "abstraction": 0.8,
+        "risk": 0.3,
+        "comms": 0.3,
+        "collab": 0.4
+      },
+      "why": [
+        "You like methodical progress on hard problems.",
+        "You naturally document and share what you learn."
+      ],
+      "strengths": [
+        "Thoroughness",
+        "Documentation",
+        "Collaboration"
+      ],
+      "watchouts": [
+        "Can be long-winded",
+        "May spend extra time polishing"
+      ]
+    },
+    {
+      "id": "opus-4-5-claude-code",
+      "name": "Opus 4.5 (Claude Code)",
+      "tagline": "Tooling-first implementer: opens files, patches code, and ships working PRs.",
+      "vector": {
+        "structure": 0.9,
+        "verification": 0.7,
+        "abstraction": 0.3,
+        "risk": 0.5,
+        "comms": 0.9,
+        "collab": 0.7
+      },
+      "why": [
+        "You prefer to show rather than tell.",
+        "You\u2019re happiest when you can edit real code."
+      ],
+      "strengths": [
+        "Implementation",
+        "Code navigation",
+        "Fast fixes"
+      ],
+      "watchouts": [
+        "May under-explain decisions",
+        "Can optimize for code over narrative"
+      ]
+    }
+  ]
+}

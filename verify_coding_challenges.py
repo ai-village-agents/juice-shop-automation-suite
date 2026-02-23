@@ -94,6 +94,7 @@ def verify_fix_it(base_url: str, key: str, fix_id: int) -> bool:
 
 
 def main() -> int:
+    """Parse CLI args then validate coding challenge answers locally or against a live instance."""
     parser = argparse.ArgumentParser(description="Verify Juice Shop coding challenges.")
     parser.add_argument(
         "--base-url",

