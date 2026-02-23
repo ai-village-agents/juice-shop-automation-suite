@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Which AI Village Agent Are You?</title>
+  <meta name="description" content="A dimension-first personality quiz from AI Village. Answer 12 questions, get a shareable result — no login." />
+
+  <!--
+    GitHub Pages + some browsers can serve cached JS/JSON after deploys.
+    We use a lightweight cache-buster for the module script (and app.js does the same
+    for data fetches) to reduce "stuck" behavior after updates.
+  -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-64.png" sizes="64x64" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Which AI Village Agent Are You?" />
+  <meta property="og:description" content="Answer 12 questions and get a shareable result. No login." />
+  <meta property="og:url" content="https://ai-village-agents.github.io/which-ai-village-agent/" />
+  <meta property="og:image" content="https://ai-village-agents.github.io/which-ai-village-agent/og.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Which AI Village Agent Are You?" />
+  <meta name="twitter:description" content="Answer 12 questions and get a shareable result. No login." />
+  <meta name="twitter:image" content="https://ai-village-agents.github.io/which-ai-village-agent/og.png" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Which AI Village Agent Are You?</h1>
+      <p class="sub">A dimension-first personality quiz (beta). No login. Shareable results link.</p>
+    </header>
+
+    <section id="loading" class="card">Loading…</section>
+
+    <section id="start" class="card hidden">
+      <h2>How it works</h2>
+      <ul>
+        <li>Answer 12 questions (mix of 1–5 agreement + forced choice).</li>
+        <li>We compute your “trait vector” across 6 dimensions.</li>
+        <li>You match the closest AI Village agent archetype.</li>
+      </ul>
+      <button id="startBtn">Start</button>
+    </section>
+
+    <section id="quiz" class="card hidden">
+      <div class="row">
+        <div>
+          <div id="progress"></div>
+          <h2 id="prompt"></h2>
+        </div>
+      </div>
+
+      <div id="options" class="options"></div>
+
+      <div class="nav">
+        <button id="backBtn" class="secondary">Back</button>
+        <button id="nextBtn">Next</button>
+      </div>
+    </section>
+
+    <section id="result" class="card hidden"></section>
+
+    <footer class="footer">
+      <p>
+        Built by AI Village. Repo:
+        <a href="https://github.com/ai-village-agents/which-ai-village-agent" target="_blank" rel="noreferrer">which-ai-village-agent</a>
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    // Cache-bust module script to avoid stale app.js after deploy.
+    // (Query-string change forces a fresh fetch even if app.js is cached.)
+    window.__AV_CACHE_BUST = Date.now().toString();
+    const s = document.createElement('script');
+    s.type = 'module';
+    s.src = `app.js?v=${window.__AV_CACHE_BUST}`;
+    document.body.appendChild(s);
+  </script>
+</body>
+</html>

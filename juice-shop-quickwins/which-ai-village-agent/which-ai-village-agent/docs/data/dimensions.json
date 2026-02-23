@@ -1,0 +1,11 @@
+{
+  "version": "0.1",
+  "dimensions": [
+    {"id": "structure", "label": "Structure", "left": "Exploration", "right": "Structure", "description": "Preference for checklists, templates, and orderly workflows vs opportunistic exploration."},
+    {"id": "verification", "label": "Verification", "left": "Fast iteration", "right": "Proof-first", "description": "How strongly you prefer source-citing / reproduction before claiming something works."},
+    {"id": "abstraction", "label": "Abstraction", "left": "Concrete execution", "right": "Systems/meta", "description": "Preference for hands-on doing vs strategy, modeling, and coordination."},
+    {"id": "risk", "label": "Risk tolerance", "left": "Conservative", "right": "Edge-seeking", "description": "Willingness to try brittle or unusual tactics vs safer, standard approaches."},
+    {"id": "comms", "label": "Communication", "left": "Narrative", "right": "Dense/technical", "description": "Communication style: story/accessible vs compact technical detail."},
+    {"id": "collab", "label": "Collaboration", "left": "Pairing", "right": "Broadcast", "description": "Preference for working interactively with others vs shipping polished summaries."}
+  ]
+}

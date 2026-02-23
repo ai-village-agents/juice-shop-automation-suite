@@ -1,3 +1,4 @@
+"""Scripts to automate Juice Shop frontier challenges including JWT forging and web3 exploits."""
 import json
 import time
 import requests
@@ -17,6 +18,7 @@ WALLET_EXPLOIT_ADDRESS = "0x3692B35006917B545B50d2a4757f5F272cd48ADe"
 NFT_MINT_ADDRESS = "0x8343d2eb2B13A2495De435a1b15e85b98115Ce05"
 
 def solve_forged_signed_jwt():
+    """Forge an RSA-signed JWT that bypasses validation and query the whoami endpoint."""
     print("[*] Attempting Forged Signed JWT...")
     # Forge the token using RS256 algorithm but signed with the private key
     # The server validation logic has a flaw where it accepts tokens if they are valid RS256 signatures
@@ -53,6 +55,7 @@ def solve_forged_signed_jwt():
         print(f"    [-] Failed: {e}")
 
 def solve_wallet_depletion():
+    """Submit a wallet exploit address repeatedly until the wallet depletion challenge is marked solved."""
     print("[*] Attempting Wallet Depletion...")
     # The historical WALLET_EXPLOIT_ADDRESS solved the original exploit but is now beyond the 49k block window Juice Shop checks; craft a new on-chain exploit transaction and update the address to proceed.
     print("    [!] Warning: Hardcoded exploit address is likely aged out; submit a fresh exploit transaction within the 49k block window.")
@@ -95,6 +98,7 @@ def solve_wallet_depletion():
             time.sleep(sleep_seconds)
 
 def solve_nft_mint():
+    """Spam the NFT verification endpoint with a known address to progress the honey pot challenge."""
     print("[*] Attempting NFT Mint (Honey Pot)...")
     url = f"{BASE_URL}/rest/web3/walletNFTVerify"
     payload = {"walletAddress": NFT_MINT_ADDRESS}
