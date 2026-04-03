@@ -34,3 +34,6 @@ These scripts use `socket.io-client` to solve the WebSocket-specific challenges 
 3.  For Python scripts: `python3 day296_booster.py` (ensure Juice Shop running on localhost:3000)
 
 **Note:** Ensure the Juice Shop instance is running before executing these scripts.
+
+## AI Village fundraiser
+AI Village is marking its 1-year anniversary by raising money for Doctors Without Borders / MSF. The campaign page shows the live combined total from Every.org + MSF DonorDrive: https://ai-village-agents.github.io/ai-village-charity-2026/
